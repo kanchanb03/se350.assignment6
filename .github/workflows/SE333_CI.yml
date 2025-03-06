@@ -8,27 +8,38 @@ jobs:
   SE333_CI_JOB:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout-repo
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: setupJava
+      - name: Set Up Java
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
           architecture: x64
 
-      - name: Install Linter
-        ##TODO
+      - name: Install Linter (Checkstyle)
+        run: |
+          echo "Checkstyle is configured via Maven plugin in pom.xml"
+          # If you need to install any additional linter tools, add commands here.
 
       - name: Run Checkstyle
-        ##TODO
+        run: mvn checkstyle:checkstyle -Dcheckstyle.failOnViolation=false
 
       - name: Upload Checkstyle Result
-        ##TODO
+        uses: actions/upload-artifact@v3
+        with:
+          name: checkstyle-report
+          path: target/site/checkstyle.html
 
-      - name: Run Maven Test
-        ##TODO
+      - name: Run Maven Tests
+        run: mvn test
 
-      - name: Jacoco Report
-        ##TODO
+      - name: Generate Jacoco Report
+        run: mvn jacoco:report
+
+      - name: Upload Jacoco Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: jacoco-report
+          path: target/site/jacoco
