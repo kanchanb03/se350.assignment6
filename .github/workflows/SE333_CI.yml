@@ -20,7 +20,6 @@ jobs:
 
       - name: Run Checkstyle Analysis
         run: mvn checkstyle:check
-        # Checkstyle runs during the validate phase as configured in your pom.xml.
 
       - name: Upload Checkstyle Report
         uses: actions/upload-artifact@v4
@@ -29,7 +28,7 @@ jobs:
           path: target/checkstyle-result.xml
 
       - name: Run Tests and Generate Coverage Report
-        run: mvn clean test
+        run: mvn clean verify
 
       - name: Upload JaCoCo Coverage Report
         uses: actions/upload-artifact@v4
