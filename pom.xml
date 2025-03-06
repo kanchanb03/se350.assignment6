@@ -64,14 +64,14 @@
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
-                        <phase>pre-integration-test</phase>
+                        <phase>test</phase>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
                     <execution>
                         <id>report</id>
-                        <phase>post-integration-test</phase>
+                        <phase>test</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
@@ -79,7 +79,7 @@
                 </executions>
             </plugin>
 
-            <!-- Fix Checkstyle so it does not fail the build -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
